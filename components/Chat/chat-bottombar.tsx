@@ -4,11 +4,10 @@ import React, { useRef, useState } from "react";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@ChatApp/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Message, loggedInUserData } from "@ChatApp/data/data";
 import { Input } from "@ChatApp/components/ui/input";
 
 interface ChatBottombarProps {
-  sendMessage: (newMessage: Message) => void;
+  sendMessage: (newMessage: any) => void;
   isMobile: boolean;
 }
 
@@ -25,25 +24,9 @@ export default function ChatBottombar({
     setMessage(event.target.value);
   };
 
-  const handleThumbsUp = () => {
-    const newMessage: Message = {
-      id: message.length + 1,
-      name: loggedInUserData.name,
-      avatar: loggedInUserData.avatar,
-      message: "👍",
-    };
-    sendMessage(newMessage);
-    setMessage("");
-  };
-
   const handleSend = () => {
     if (message.trim()) {
-      const newMessage: Message = {
-        id: message.length + 1,
-        name: loggedInUserData.name,
-        avatar: loggedInUserData.avatar,
-        message: message.trim(),
-      };
+      const newMessage: any = {};
       sendMessage(newMessage);
       setMessage("");
 
@@ -106,7 +89,9 @@ export default function ChatBottombar({
           <Input
             type="email"
             value={message}
+            //@ts-ignore
             onKeyDown={handleKeyPress}
+            //@ts-ignore
             onChange={handleInputChange}
             placeholder="Email"
           />

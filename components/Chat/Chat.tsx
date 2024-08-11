@@ -1,20 +1,15 @@
-import { Message, UserData } from "@ChatApp/data/data";
 import ChatTopbar from "./chat-topbar";
 import { ChatList } from "./chat-list";
-import React from "react";
+import React, { useEffect } from "react";
 
-interface ChatProps {
-  messages?: Message[];
-  selectedUser: UserData;
-  isMobile: boolean;
-}
+export function Chat({ messages, selectedUser, isMobile }: any) {
+  const [messagesState, setMessages] = React.useState<any[]>(messages ?? []);
 
-export function Chat({ messages, selectedUser, isMobile }: ChatProps) {
-  const [messagesState, setMessages] = React.useState<Message[]>(
-    messages ?? []
-  );
+  useEffect(() => {
+    setMessages(messages as any);
+  }, [messages]);
 
-  const sendMessage = (newMessage: Message) => {
+  const sendMessage = (newMessage: any) => {
     setMessages([...messagesState, newMessage]);
   };
 
